@@ -165,7 +165,7 @@ www     IN      A       200.189.123.64
 @       IN      A       200.189.123.64
 ```
 
-> Obs: O IP 200.189.123.64 foi retirado do site PIÁ (Paraná Inteligência Artificial) somente para testes, utilize o IP do seu site.
+> Obs: O IP 200.189.123.64 foi retirado do site PIÁ (Paraná Inteligência Artificial) somente para testes, utilize o IP do seu site.  
 > Obs: The IP 200.189.123.64 was removed of PIÁ (Paraná Inteligência Artificial) site only for tests, use the IP to your site.
 
 Verificar se as configurações acima estão corretas:  
