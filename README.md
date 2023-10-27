@@ -168,6 +168,9 @@ www     IN      A       200.189.123.64
 > Obs: O IP 200.189.123.64 foi retirado do site PIÁ (Paraná Inteligência Artificial) somente para testes, utilize o IP do seu site.  
 > Obs: The IP 200.189.123.64 was removed of PIÁ (Paraná Inteligência Artificial) site only for tests, use the IP to your site.
 
+> Obs 2: O número do serial deve ser aumentado em +1 quando salvo, no exemplo acima está em 3, assim que for salvo novamente, deve ser alterado para 4. A orientação serve para outros arquivos utilizados no tutorial.  
+> Obs 2: The serial number should be increased by +1 when saved, in the example above is in 3, as soon as it is saved again, it must be changed for 4. The oriention serves for others files used in tutorial.
+
 Verificar se as configurações acima estão corretas:  
 Verify if the above settings are correct:  
 ```named-checkzone edvaldojr.com.br /etc/bind/zones/edvaldojr.com.br```
