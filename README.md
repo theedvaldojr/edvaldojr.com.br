@@ -334,6 +334,9 @@ netflix.com     IN CNAME .
 *.netflix.com   IN CNAME .
 ```
 
+> Obs: O número do serial deve ser aumentado em +1 quando salvo, no exemplo acima está em 2, assim que for salvo novamente, deve ser alterado para 3.  
+> Obs: The serial number should be increased by +1 when saved, in the example above is in 2, as soon as it is saved again, it must be changed for 3.
+
 -------
 
 Reiniciar o serviço de bind9 para aplicar as configurações:  
