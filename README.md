@@ -378,6 +378,9 @@ Address:	127.0.0.53#53
 ** server can't find netflix.com: NXDOMAIN
 ```
 
+> Obs 2: Para o perfeito funcionamento, deve se utilizar 2 DNS locais com as mesmas configurações ou setar somente 1 DNS local na maquina ou servidor DHCP. Deixando 1 DNS local e 1 DNS público, a requisição irá passar pelo DNS local e irá consultar no DNS público, causando o mal funcionamento do bloqueio.
+> Obs 2: For perfect operation, must if utility 2 Local DNS with the same settings or set only 1 local DNS on the machine or DHCP server. Leaving 1 local DNS and 1 public DNS, the requestion will pass by local DNS and will query the public DNS, causing the malfunction of block.
+
 -------
 
 ## Redimensionar disco no Linux | Resize disk in Linux
