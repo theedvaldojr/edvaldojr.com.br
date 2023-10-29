@@ -383,6 +383,223 @@ Address:	127.0.0.53#53
 
 -------
 
+## Instalar Zabbix | Install Zabbix
+
+Exemplo do meu laboratório:  
+Example of my laboratory:
+
+Minha rede **LAN** é **192.168.25.0/24**  
+My network **LAN** is **192.168.25.0/24**
+
+O endereço IP do **Zabbix** é **192.168.25.4**  
+The address IP of **Zabbix** is **192.168.25.4**
+
+Meu domínio é **edvaldojr.com.br**  
+My domain is **edvaldojr.com.br**
+
+Versão: **Zabbix 6.4**  
+Version: **Zabbix 6.4**
+
+S.O.: **Ubuntu 22.04**  
+O.S.: **Ubuntu 22.04**
+
+-------
+
+Instalando e atualizando o repositório Zabbix:  
+Installing and updating the Zabbix repository:
+
+Acessar modo superuser:  
+Acess mode superuser:  
+```sudo su```
+
+Realizar o update:  
+Realize the update:  
+```apt update```
+
+Realizar o upgrade:  
+Realize the upgrade:  
+```apt upgrade```
+
+Baixe o repositório Zabbix:  
+Download the Zabbix repository:  
+```wget https://repo.zabbix.com/zabbix/6.4/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.4-1+ubuntu22.04_all.deb```
+
+Instale o pacote Zabbix:  
+Install Zabbix package:  
+```dpkg -i zabbix-release_6.4-1+ubuntu22.04_all.deb```
+
+Realizar o update:  
+Realize the update:  
+```apt update```
+
+Instalando o Zabbix Server, FrontEnd e Agent:  
+Install Zabbix Server, FrontEnd and Agent  
+```apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent```
+
+Instalando o MySQL server:  
+Install MySQL server:  
+```apt install mysql-server```
+
+Iniciar SQL:  
+Start SQL:  
+```systemctl start mysql```
+
+Verificar o status do mysql:  
+Verify status of mysql:  
+```systemctl status mysql```
+
+Resultado esperado: **Active: active (running)**  
+Expected result: **Active: active (running)**
+
+Criando o banco de dados inicial:  
+Create the initial database:  
+> No lugar de "Password123", insira uma senha segura!
+> In place of "Password123", enter a strong password!
+```
+mysql
+mysql> create database zabbix character set utf8mb4 collate utf8mb4_bin;
+mysql> create user zabbix@localhost identified by 'Password123';
+mysql> grant all privileges on zabbix.* to zabbix@localhost;
+mysql> set global log_bin_trust_function_creators = 1;
+mysql> quit;
+```
+
+No host do servidor Zabbix, importe o esquema e os dados iniciais. Você será solicitado a inserir sua senha recém-criada:  
+On Zabbix server host import initial schema and data. You will be prompted to enter your newly created password:  
+```zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -uzabbix -p zabbix```
+
+> Insira a mesma senha criada na criação do bando de dados.  
+> Enter the same password created in creating the database.  
+```
+Insira sua senha: Password123
+Enter password: Password123
+```
+
+Desabilite a opção “log_bin_trust_function_creators” depois de importar o esquema de banco de dados:  
+Disable log_bin_trust_function_creators option after importing database schema:  
+```
+mysql
+mysql> set global log_bin_trust_function_creators = 0;
+mysql> quit;
+```
+
+Configure o banco de dados do servidor Zabbix:  
+Configure the database for Zabbix server:  
+```vim /etc/zabbix/zabbix_server.conf```
+
+> Insira a mesma senha criada na criação do bando de dados.  
+> Enter the same password created in creating the database.  
+```
+DBPassword=Password123
+```
+
+Inicie o servidor Zabbix e o agente de processos:  
+Start Zabbix server and agent processes:  
+```
+systemctl restart zabbix-server zabbix-agent apache2
+systemctl enable zabbix-server zabbix-agent apache2
+```
+
+Gere os arquivos de localização en_US e pt_BR:  
+Generate the files of en_US and pt_BR location:  
+```
+locale-gen en_US.UTF-8
+locale-gen pt_BR.UTF-8
+```
+
+Execute o comando abaixo:  
+Run command below:  
+```dpkg-reconfigure locales```
+
+Irá abrir uma janela com o titulo “Locales a serem gerados”, selecione o idioma conforme sua necessidade, neste caso, irei selecionar os 3 abaixo:  
+A window will open with the title “Locales to be generated”, select the language according to your need, in this case, i will select the 3 below:  
+```
+en_US.UTF-8 UTF-8
+pt_BR.UTF-8 UTF-8
+pt_PT.UTF-8 UTF-8
+```
+
+Irá abrir uma janela com o título “Locale padrão para o ambiente do sistema:”, selecione o idioma conforme sua necessidade, nesse caso irei selecionar o “pt_BR.UTF-8”.  
+A window will open tich the title “Locale default to the system environment”, select the language according to your need, i will select the “pt_BR.UTF-8”.
+
+> Obs: Altere o documento abaixo apenas se você quiser abrir o zabbix como http://localhost ou http://zabbix.seudominio.com.br!  
+Se você continuar abrindo como http://localhost/zabbix ou http://zabbix.seudominio.com.br/zabbix, não altere o documento abaixo e prossiga com o tutorial:  
+> Obs: Change the document below only if you wants open of zabbix as http://localhost or http://zabbix.yourdomain.com.br!  
+If you continue open as http://localhost/zabbix or http://zabbix.seudominio.com.br/zabbix, do not change the document below and continue wich the tutorial:
+
+Execute o comando abaixo e altere de  **DocumentRoot /var/www/html** para **DocumentRoot /usr/share/zabbix**:  
+Run the command below and change of **DocumentRoot /var/www/html** for **DocumentRoot /usr/share/zabbix**:  
+```vi /etc/apache2/sites-enabled/000-default.conf```
+
+Reinicie o serviço do apache:  
+Restart the apache service:  
+```service apache2 restart```
+
+Abra o navegador e digite o endereço do zabbix conforme as alterações acima, no meu caso:  
+Open the browser and enter the address of zabbix according to changes above, in my case:  
+**http://192.168.25.4/** or **http://zabbix.edvaldojr.com.br**
+
+> Obs2: Se quiser configurar o domínio personalizado, é necessário a configuração do servidor DNS, segue o link para a configuração:  
+> Obs2: If you want to configure the custom domain, it is necessary to configure DNS server, follow the link for the configuration:  
+**https://edvaldojr.com.br/#configurar-servidor-dns-bind9--configure-dns-server-bind9**
+
+Defina a “linguagem padrão” conforme sua necessidade:  
+Define the “default language” according to your need:  
+Default language: **Português Brasileiro (PT_BR)**
+
+Na página de **Verificação de pré-requisitos**, clique em **Próximo passo**.  
+In the page “Check prerequisites”, click in **Next step**.
+
+Configura a conexão com o DB:  
+Configure the connection to the DB:
+
+> Em **Senha: Password123**, insira a mesma senha criada na criação do bando de dados.  
+```
+Tipo de banco de dados: MySQL
+Host do banco de dados: localhost
+Porta do banco de dados: 0
+Nome do banco de dados: zabbix
+Armazenar credenciais em: Texto puro
+Usuário: zabbix
+Senha: Password123
+```
+
+> In **Password: Password123**, enter the same password created in creating the database.  
+```
+Database type: MySQL
+Database host: localhost
+Database port: 0
+Database name: zabbix
+Store credentials in: Plain text
+User: zabbix
+Password: Password123
+```
+
+Configurações:  
+Settings:  
+> Selecione os dados conforme sua necessidade:  
+> Select data as per to your need:  
+```
+Nome do servidor Zabbix: NomeDeTeste
+Fuso horário padrão: (UTC-03:00) America/Sao_Paulo
+Tema padrão: Escuro
+```
+
+```
+Name Zabbix server: NomeDeTeste
+Standard time zone: (UTC-03:00) America/Sao_Paulo
+Default theme: Dark
+```
+
+Insira os dados abaixo no primeiro login, lembre-se de trocar a senha do usuário após o primeiro acesso:  
+Enter the data below on first login, remember to change the user password after the first access:  
+```
+Login: Admin
+Password: zabbix
+```
+
+-------
+
 ## Redimensionar disco no Linux | Resize disk in Linux
 
 Acessar modo superusuario:  
