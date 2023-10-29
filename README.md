@@ -437,6 +437,8 @@ Instalando o Zabbix Server, FrontEnd e Agent:
 Install Zabbix Server, FrontEnd and Agent  
 ```apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent```
 
+-------
+
 Instalando o MySQL server:  
 Install MySQL server:  
 ```apt install mysql-server```
@@ -451,6 +453,8 @@ Verify status of mysql:
 
 Resultado esperado: **Active: active (running)**  
 Expected result: **Active: active (running)**
+
+-------
 
 Criando o banco de dados inicial:  
 Create the initial database:
@@ -498,6 +502,8 @@ Configure the database for Zabbix server:
 DBPassword=Password123
 ```
 
+-------
+
 Inicie o servidor Zabbix e o agente de processos:  
 Start Zabbix server and agent processes:  
 ```
@@ -526,6 +532,8 @@ pt_PT.UTF-8 UTF-8
 
 Irá abrir uma janela com o título “Locale padrão para o ambiente do sistema:”, selecione o idioma conforme sua necessidade, nesse caso irei selecionar o “pt_BR.UTF-8”.  
 A window will open tich the title “Locale default to the system environment”, select the language according to your need, i will select the “pt_BR.UTF-8”.
+
+-------
 
 > Obs: Altere o documento abaixo apenas se você quiser abrir o zabbix como http://localhost ou http://zabbix.seudominio.com.br!  
 Se você continuar abrindo como http://localhost/zabbix ou http://zabbix.seudominio.com.br/zabbix, não altere o documento abaixo e prossiga com o tutorial:  
