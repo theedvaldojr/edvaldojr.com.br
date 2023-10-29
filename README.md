@@ -33,6 +33,7 @@
 <a href="https://edvaldojr.com.br/#configurar-servidor-dns-bind9--configure-dns-server-bind9"><p>Configurar servidor DNS (Bind9) | Configure DNS server (Bind9)</p></a>
 <a href="https://edvaldojr.com.br/#configurar-bloqueio-por-dns-rpz--configure-dns-block-rpz"><p>Configurar bloqueio por DNS (RPZ) | Configure DNS block (RPZ)</p></a>
 <a href="https://edvaldojr.com.br/#redimensionar-disco-no-linux--resize-disk-in-linux"><p>Redimensionar disco no Linux | Resize disk in Linux</p></a>
+<a href="https://edvaldojr.com.br/#instalar-zabbix--install-zabbix"><p>Instalar Zabbix | Install Zabbix</p></a>
 
 </details>
 
@@ -400,8 +401,8 @@ My domain is **edvaldojr.com.br**
 Versão: **Zabbix 6.4**  
 Version: **Zabbix 6.4**
 
-S.O.: **Ubuntu 22.04**  
-O.S.: **Ubuntu 22.04**
+S.O.: **Ubuntu Server 22.04**  
+O.S.: **Ubuntu Server 22.04**
 
 -------
 
@@ -452,9 +453,11 @@ Resultado esperado: **Active: active (running)**
 Expected result: **Active: active (running)**
 
 Criando o banco de dados inicial:  
-Create the initial database:  
-> No lugar de "Password123", insira uma senha segura!
+Create the initial database:
+
+> No lugar de "Password123", insira uma senha segura!  
 > In place of "Password123", enter a strong password!
+
 ```
 mysql
 mysql> create database zabbix character set utf8mb4 collate utf8mb4_bin;
