@@ -472,7 +472,8 @@ On Zabbix server host import initial schema and data. You will be prompted to en
 ```zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -uzabbix -p zabbix```
 
 > Insira a mesma senha criada na criação do bando de dados.  
-> Enter the same password created in creating the database.  
+> Enter the same password created in creating the database.
+
 ```
 Insira sua senha: Password123
 Enter password: Password123
@@ -491,7 +492,8 @@ Configure the database for Zabbix server:
 ```vim /etc/zabbix/zabbix_server.conf```
 
 > Insira a mesma senha criada na criação do bando de dados.  
-> Enter the same password created in creating the database.  
+> Enter the same password created in creating the database.
+
 ```
 DBPassword=Password123
 ```
@@ -530,9 +532,10 @@ Se você continuar abrindo como http://localhost/zabbix ou http://zabbix.seudomi
 > Obs: Change the document below only if you wants open of zabbix as http://localhost or http://zabbix.yourdomain.com.br!  
 If you continue open as http://localhost/zabbix or http://zabbix.seudominio.com.br/zabbix, do not change the document below and continue wich the tutorial:
 
-Execute o comando abaixo e altere de  **DocumentRoot /var/www/html** para **DocumentRoot /usr/share/zabbix**:  
-Run the command below and change of **DocumentRoot /var/www/html** for **DocumentRoot /usr/share/zabbix**:  
 ```vi /etc/apache2/sites-enabled/000-default.conf```
+
+Altere de **DocumentRoot /var/www/html** para **DocumentRoot /usr/share/zabbix**:  
+Change of **DocumentRoot /var/www/html** for **DocumentRoot /usr/share/zabbix**:  
 
 Reinicie o serviço do apache:  
 Restart the apache service:  
@@ -544,11 +547,11 @@ Open the browser and enter the address of zabbix according to changes above, in 
 
 > Obs2: Se quiser configurar o domínio personalizado, é necessário a configuração do servidor DNS, segue o link para a configuração:  
 > Obs2: If you want to configure the custom domain, it is necessary to configure DNS server, follow the link for the configuration:  
-**https://edvaldojr.com.br/#configurar-servidor-dns-bind9--configure-dns-server-bind9**
+[Configurar servidor DNS (Bind9) | Configure DNS server (Bind9)](https://edvaldojr.com.br/#configurar-servidor-dns-bind9--configure-dns-server-bind9)
 
 Defina a “linguagem padrão” conforme sua necessidade:  
 Define the “default language” according to your need:  
-Default language: **Português Brasileiro (PT_BR)**
+```Default language: **Português Brasileiro (PT_BR)**```
 
 Na página de **Verificação de pré-requisitos**, clique em **Próximo passo**.  
 In the page “Check prerequisites”, click in **Next step**.
@@ -556,7 +559,8 @@ In the page “Check prerequisites”, click in **Next step**.
 Configura a conexão com o DB:  
 Configure the connection to the DB:
 
-> Em **Senha: Password123**, insira a mesma senha criada na criação do bando de dados.  
+> Em **Senha: Password123**, insira a mesma senha criada na criação do bando de dados.
+
 ```
 Tipo de banco de dados: MySQL
 Host do banco de dados: localhost
@@ -567,7 +571,8 @@ Usuário: zabbix
 Senha: Password123
 ```
 
-> In **Password: Password123**, enter the same password created in creating the database.  
+> In **Password: Password123**, enter the same password created in creating the database.
+
 ```
 Database type: MySQL
 Database host: localhost
@@ -579,14 +584,17 @@ Password: Password123
 ```
 
 Configurações:  
-Settings:  
+Settings:
+
 > Selecione os dados conforme sua necessidade:  
-> Select data as per to your need:  
+
 ```
 Nome do servidor Zabbix: NomeDeTeste
 Fuso horário padrão: (UTC-03:00) America/Sao_Paulo
 Tema padrão: Escuro
 ```
+
+> Select data as per to your need:
 
 ```
 Name Zabbix server: NomeDeTeste
